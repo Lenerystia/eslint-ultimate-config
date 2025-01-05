@@ -85,8 +85,8 @@ For managing and organizing imports effectively. Includes:
 npm install --save-dev eslint-plugin-import eslint-plugin-import-alias
 ```
 
-## If you want more tools, go there -> [More tools](https://github.com/Lenerystia/JS-TS-ultimate-config-selected-tool)
-
 ### [Meta Plugins](https://www.npmjs.com/package/eslint-plugin-eslint-plugin)
 ```
 npm install --save-dev eslint-plugin-eslint-plugin
+```
+## If you want more tools, go there -> [More tools](https://github.com/Lenerystia/JS-TS-ultimate-config-selected-tool)

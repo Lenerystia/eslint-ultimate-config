@@ -2,6 +2,12 @@
 One file, much plugins - just copy paste
 
 ## Eslint plugins
+
+### If you want install all at once
+```
+npm install --save-dev @eslint/js typescript-eslint typescript svelte-eslint-parser eslint-plugin-svelte prettier-plugin-svelte @html-eslint/parser @html-eslint/eslint-plugin eslint-plugin-tailwindcss @pandacss/eslint-plugin eslint-plugin-drizzle @vitest/eslint-plugin eslint-plugin-perfectionist eslint-plugin-unicorn @stylistic/eslint-plugin eslint-plugin-functional eslint-config-prettier prettier-plugin-organize-imports eslint-plugin-security eslint-plugin-sonarjs eslint-plugin-tsdoc eslint-plugin-promise @cspell/eslint-plugin eslint-plugin-import eslint-plugin-import-alias eslint-plugin-eslint-plugin
+```
+
 ### [Eslint JS](https://eslint.org/)
 ```
 npm install --save-dev @eslint/js
@@ -78,6 +84,8 @@ For managing and organizing imports effectively. Includes:
 ```
 npm install --save-dev eslint-plugin-import eslint-plugin-import-alias
 ```
+
+## If you want more tools, go there [More tools](https://github.com/Lenerystia/JS-TS-ultimate-config-selected-tool)
 
 ### [Meta Plugins](https://www.npmjs.com/package/eslint-plugin-eslint-plugin)
 ```

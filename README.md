@@ -1,5 +1,5 @@
 # eslint-ultimate-config
-One file, much plugins - just copy paste
+One file, many plugins – just copy and paste.
 
 ## Eslint plugins
 

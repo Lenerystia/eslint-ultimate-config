@@ -27,12 +27,12 @@ import svelteParser from 'svelte-eslint-parser';
 // Toggles for enabling/disabling rule groups
 const perfectionistFlag = false;
 const svelteFlag = true;
-const typescriptFlag = true;
+const typescriptFlag = false;
 const unicornFlag = false;
 const stylisticFlag = false;
-const jsFlag = true;
+const jsFlag = false;
 const vitestFlag = false;
-const tsDocFlag = true;
+const tsDocFlag = false;
 const esImportFlag = false;
 const functionalFlag = false;
 const securityFlag = false;
@@ -46,7 +46,7 @@ const prettierFlag = false;
 const nodeFlag = false;
 const pandacssFlag = false;
 const tailwindFlag = false;
-const cspellFlag = true;
+const cspellFlag = false;
 
 export default [
 	prettier,
@@ -61,7 +61,8 @@ export default [
 			'vite.config.ts',
 			'eslint.config.js',
 			'drizzle.config.ts',
-			'commitlint.config.js'
+			'commitlint.config.js',
+			'vitest.config.js'
 		],
 		languageOptions: {
 			parser: svelteParser,
@@ -111,10 +112,65 @@ export default [
 			...(svelteFlag && {
 				...svelte.configs.recommended.rules,
 				...svelte.configs.prettier.rules,
-				'svelte/no-at-html-tags': 'error',
-				'svelte/valid-compile': 'error',
-				'svelte/no-unused-class-name': 'warn',
-				'svelte/no-target-blank': ['error', { enforceDynamicLinks: 'always' }]
+				// 'svelte/no-navigation-without-base': 'error', // TODO
+
+				// Possible Errors
+				'svelte/infinite-reactive-loop': 'error',
+				// "svelte/no-deprecated-raw-special-elements": "error", // TODO
+				'svelte/no-dom-manipulating': 'error',
+				'svelte/no-dupe-on-directives': 'error',
+				'svelte/no-dupe-use-directives': 'error',
+				'svelte/no-export-load-in-svelte-module-in-kit-pages': 'error',
+				'svelte/no-reactive-reassign': 'error',
+				'svelte/no-store-async': 'error',
+				'svelte/require-store-callbacks-use-set-param': 'error',
+				'svelte/require-store-reactive-access': 'error',
+				'svelte/valid-prop-names-in-kit-pages': 'error',
+
+				// Security
+				'svelte/no-target-blank': 'error',
+
+				// Stylistic issues in svelte
+				'svelte/derived-has-same-inputs-outputs': 'error',
+				'svelte/first-attribute-linebreak': 'error',
+				'svelte/html-closing-bracket-new-line': 'error',
+				'svelte/html-closing-bracket-spacing': 'error',
+				'svelte/html-quotes': 'error',
+				'svelte/html-self-closing': 'error',
+				'svelte/indent': 'off',
+				'svelte/no-trailing-spaces': 'off',
+				'svelte/max-attributes-per-line': 'off',
+				'svelte/mustache-spacing': 'error',
+				'svelte/no-extra-reactive-curlies': 'error',
+				// "svelte/no-restricted-html-elements": "error",
+				'svelte/no-spaces-around-equal-signs-in-attribute': 'error',
+				'svelte/prefer-class-directive': 'error',
+				'svelte/prefer-style-directive': 'error',
+				'svelte/shorthand-attribute': 'error',
+				'svelte/shorthand-directive': 'error',
+				'svelte/sort-attributes': 'error',
+				'svelte/spaced-html-comment': 'off',
+
+				// Best Practices
+				// "svelte/no-useless-children-snippet": "error", // TODO
+				'svelte/no-useless-mustaches': 'error',
+				// "svelte/prefer-const": "error",
+				'svelte/prefer-destructured-store-props': 'off', // TODO
+				'svelte/require-each-key': 'error',
+				'svelte/require-event-dispatcher-types': 'error',
+				'svelte/require-optimized-style-attribute': 'error',
+				'svelte/require-stores-init': 'error',
+				'svelte/valid-each-key': 'error',
+				'svelte/no-ignored-unsubscribe': 'error',
+				'svelte/no-immutable-reactive-statements': 'error',
+				'svelte/no-inline-styles': 'off',
+				'svelte/no-inspect': 'error',
+				'svelte/no-reactive-functions': 'error',
+				'svelte/no-reactive-literals': 'error',
+				'svelte/no-svelte-internal': 'error',
+				'svelte/no-unused-class-name': 'error',
+				'svelte/block-lang': ['error', { script: ['ts'], style: 'scss' }],
+				'svelte/button-has-type': 'error'
 			}),
 
 			/* promise rules */
@@ -381,29 +437,7 @@ export default [
 				'no-redeclare': 'error',
 				'no-regex-spaces': 'warn',
 				// "no-restricted-imports": ["warn", baseRestrictedImports],
-				'no-restricted-syntax': [
-					'warn',
-					{
-						selector: "CallExpression[callee.name='Number']",
-						message: "Don't use the Number function. Use parseInt or parseFloat instead."
-					},
-					{
-						selector: "CallExpression[callee.name='Boolean']",
-						message: "Don't use the Boolean function. Use a strict comparison instead."
-					},
-					{
-						selector: 'TSEnumDeclaration',
-						message: 'Use a type with a union of strings instead.'
-					},
-					{
-						selector: "TSTypeReference Identifier[name='React']",
-						message: 'Import the type explicitly instead of using the React global.'
-					},
-					{
-						selector: "TSTypeReference Identifier[name='PropsWithChildren']",
-						message: 'Explicitly declare children in your props type.'
-					}
-				],
+				'no-restricted-syntax': 'off',
 				'no-return-assign': ['warn', 'always'],
 				'no-script-url': 'error',
 				'no-sequences': [
@@ -457,12 +491,10 @@ export default [
 
 			/* Perfectionist rules */
 			...(perfectionistFlag && {
-				...perfectionist.configs['recommended-alphabetical'].rules
-				// 'perfectionist/sort-exports': ['error', { order: 'desc', type: 'natural' }],
-				// 'perfectionist/sort-imports': ['error', { order: 'asc', type: 'natural' }],
-				// 'perfectionist/sort-interfaces': ['error', { order: 'asc', type: 'natural' }],
-				// 'perfectionist/sort-named-exports': ['error', { order: 'asc', type: 'natural' }],
-				// 'perfectionist/sort-named-imports': ['error', { order: 'asc', type: 'natural' }],
+				...perfectionist.configs['recommended-natural'].rules,
+				'perfectionist/sort-objects': 'off',
+				'perfectionist/sort-classes': 'off',
+				'perfectionist/sort-object-types': 'off'
 			}),
 
 			/* Unicorn rules */

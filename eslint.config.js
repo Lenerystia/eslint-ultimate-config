@@ -13,7 +13,8 @@ import esEs from 'eslint-plugin-eslint-plugin';
 import functional from 'eslint-plugin-functional';
 import esImport from 'eslint-plugin-import';
 import alias from 'eslint-plugin-import-alias';
-import node from 'eslint-plugin-node';
+import json from '@eslint/json';
+import node from 'eslint-plugin-n';
 import perfectionist from 'eslint-plugin-perfectionist';
 import promise from 'eslint-plugin-promise';
 import security from 'eslint-plugin-security';
@@ -25,44 +26,48 @@ import unicorn from 'eslint-plugin-unicorn';
 import svelteParser from 'svelte-eslint-parser';
 
 // Toggles for enabling/disabling rule groups
-const perfectionistFlag = false;
-const svelteFlag = true;
-const typescriptFlag = false;
-const unicornFlag = false;
-const stylisticFlag = false;
-const jsFlag = false;
-const vitestFlag = false;
-const tsDocFlag = false;
+const aliasFlag = false;
+const cspellFlag = false;
+const drizzleFlag = false;
+const esEsFlag = false;
 const esImportFlag = false;
 const functionalFlag = false;
-const securityFlag = false;
-const sonarjsFlag = false;
-const aliasFlag = false;
 const htmlFlag = false;
-const esEsFlag = false;
-const promiseFlag = false;
-const drizzleFlag = false;
-const prettierFlag = false;
+const jsFlag = false;
+const jsonFlag = true;
 const nodeFlag = false;
 const pandacssFlag = false;
+const perfectionistFlag = false;
+const prettierFlag = false;
+const promiseFlag = false;
+const securityFlag = false;
+const sonarjsFlag = false;
+const stylisticFlag = false;
+const svelteFlag = false;
 const tailwindFlag = false;
-const cspellFlag = false;
+const tsDocFlag = false;
+const typescriptFlag = true;
+const unicornFlag = false;
+const vitestFlag = false;
 
 export default [
 	prettier,
 	{
+		name: 'Main ruleset',
 		files: ['**/*.{ts,tsx,js,jsx,cjs,mjs,svelte}'],
 		ignores: [
 			'node_modules',
 			'build',
 			'.svelte-kit/**',
-			'src/tests/',
 			'svelte.config.js',
 			'vite.config.ts',
 			'eslint.config.js',
 			'drizzle.config.ts',
 			'commitlint.config.js',
-			'vitest.config.js'
+			'vitest.config.js',
+			'src/routes/sandbox/**',
+			'src/routes/debug/**',
+			'tsconfig.json',
 		],
 		languageOptions: {
 			parser: svelteParser,
@@ -70,8 +75,8 @@ export default [
 				parser: tsParser,
 				project: './tsconfig.json',
 				extraFileExtensions: ['.svelte'],
-				tsconfigRootDir: import.meta.dirname
-			}
+				tsconfigRootDir: import.meta.dirname,
+			},
 		},
 		plugins: {
 			'@typescript-eslint': ts,
@@ -91,22 +96,60 @@ export default [
 			security: security,
 			alias: alias,
 			node: node,
-			cspell: cspell
+			cspell: cspell,
+			vitest: vitest,
 		},
 		settings: {
 			'import/resolver': {
 				typescript: {
-					alwaysTryTypes: true
-				}
-			}
+					alwaysTryTypes: true,
+				},
+			},
 		},
 		rules: {
 			...(cspellFlag && {
-				'cspell/spellchecker': 'warn'
+				'cspell/spellchecker': 'warn',
 			}),
 			...(nodeFlag && {
-				// ...node.configs.recommended.rules,
-				...node.configs['recommended-script'].rules
+				'node/callback-return': 'error',
+				'node/exports-style': ['error', 'exports'],
+				'node/file-extension-in-import': 'off',
+				'node/global-require': 'error',
+				'node/handle-callback-err': 'error',
+				'node/hashbang': 'error',
+				'node/no-callback-literal': 'error',
+				'node/no-deprecated-api': 'error',
+				'node/no-exports-assign': 'error',
+				'node/no-extraneous-import': 'error',
+				'node/no-extraneous-require': 'error',
+				'node/no-hide-core-modules': 'off',
+				'node/no-missing-import': 'off', // TODO
+				'node/no-missing-require': 'error',
+				'node/no-mixed-requires': 'error',
+				'node/no-new-require': 'error',
+				'node/no-path-concat': 'error',
+				'node/no-process-env': 'off',
+				'node/no-process-exit': 'off',
+				'node/no-restricted-import': 'off',
+				'node/no-restricted-require': 'off',
+				'node/no-sync': 'warn',
+				'node/no-unpublished-bin': 'error',
+				'node/no-unpublished-import': 'error',
+				'node/no-unpublished-require': 'error',
+				'node/no-unsupported-features/es-builtins': 'error',
+				'node/no-unsupported-features/es-syntax': 'error',
+				'node/no-unsupported-features/node-builtins': 'off', // TODO
+				'node/prefer-global/buffer': ['error', 'always'],
+				'node/prefer-global/console': ['error', 'always'],
+				'node/prefer-global/process': ['error', 'always'],
+				'node/prefer-global/text-decoder': ['error', 'always'],
+				'node/prefer-global/text-encoder': ['error', 'always'],
+				'node/prefer-global/url': ['error', 'always'],
+				'node/prefer-global/url-search-params': ['error', 'always'],
+				'node/prefer-node-protocol': 'error',
+				'node/prefer-promises/dns': 'error',
+				'node/prefer-promises/fs': 'error',
+				'node/process-exit-as-throw': 'error',
 			}),
 			/* Svelte rules */
 			...(svelteFlag && {
@@ -170,7 +213,7 @@ export default [
 				'svelte/no-svelte-internal': 'error',
 				'svelte/no-unused-class-name': 'error',
 				'svelte/block-lang': ['error', { script: ['ts'], style: 'scss' }],
-				'svelte/button-has-type': 'error'
+				'svelte/button-has-type': 'error',
 			}),
 
 			/* promise rules */
@@ -179,7 +222,7 @@ export default [
 				'promise/no-return-wrap': 'error',
 				'promise/param-names': 'error',
 				'promise/catch-or-return': 'error',
-				'promise/no-native': 'error',
+				'promise/no-native': 'off',
 				'promise/no-nesting': 'error',
 				'promise/no-promise-in-callback': 'error',
 				'promise/no-callback-in-promise': 'error',
@@ -191,13 +234,13 @@ export default [
 				'promise/prefer-await-to-callbacks': 'error',
 				'promise/prefer-await-to-then': 'error',
 				'promise/prefer-catch': 'error',
-				'promise/spec-only': 'error'
+				'promise/spec-only': 'error',
 			}),
 
 			/* drizzle rules */
 			...(drizzleFlag && {
 				'drizzle/enforce-delete-with-where': 'error',
-				'drizzle/enforce-update-with-where': 'error'
+				'drizzle/enforce-update-with-where': 'error',
 			}),
 			/* alias rules */
 			...(aliasFlag && {
@@ -208,16 +251,16 @@ export default [
 						aliases: [
 							{ alias: '@src', matcher: '^src' }, // src/modules/app/test -> @src/modules/app/test
 							{ alias: '@test', matcher: '^test/unit' }, // test/unit/modules/app -> @test/modules/app
-							{ alias: '@testRoot', matcher: '^(test)/e2e' } // test/e2e/modules/app -> @testRoot/e2e/modules/app
-						]
-					}
-				]
+							{ alias: '@testRoot', matcher: '^(test)/e2e' }, // test/e2e/modules/app -> @testRoot/e2e/modules/app
+						],
+					},
+				],
 			}),
 			/* sonarjs rules */
 			...(sonarjsFlag && {
 				...sonarjs.configs.recommended.rules,
 				'sonarjs/deprecation': 'off',
-				'sonarjs/no-implicit-dependencies': 'error'
+				'sonarjs/no-implicit-dependencies': 'error',
 			}),
 			/* security rules */
 			...(securityFlag && {
@@ -226,7 +269,7 @@ export default [
 				'security/detect-unsafe-regex': 'error',
 				'security/detect-non-literal-regexp': 'error',
 				'security/detect-non-literal-require': 'error',
-				'security/detect-non-literal-fs-filename': 'error'
+				'security/detect-non-literal-fs-filename': 'error',
 			}),
 
 			/* import rules */
@@ -245,15 +288,10 @@ export default [
 						ts: 'never',
 						tsx: 'never',
 						js: 'never',
-						jsx: 'never'
-					}
+						jsx: 'never',
+					},
 				],
-				'import/no-restricted-paths': [
-					'error',
-					{
-						zones: [{ target: './src', from: './node_modules' }]
-					}
-				],
+				'import/no-restricted-paths': 'off',
 				'import/order': [
 					'warn',
 					{
@@ -262,12 +300,12 @@ export default [
 							{
 								pattern: '@/**',
 								group: 'internal',
-								position: 'after'
-							}
+								position: 'after',
+							},
 						],
 						alphabetize: { order: 'asc', caseInsensitive: true },
-						'newlines-between': 'always'
-					}
+						'newlines-between': 'always',
+					},
 				],
 
 				'import/no-duplicates': 'warn',
@@ -276,35 +314,39 @@ export default [
 				'import/no-extraneous-dependencies': [
 					'error',
 					{
-						devDependencies: ['**/*.test.ts', '**/scripts/**']
-					}
-				]
+						devDependencies: ['**/*.test.ts', '**/scripts/**'],
+					},
+				],
 			}),
 			/* functional rules */
 			...(functionalFlag && {
 				...functional.configs.all.rules,
-				'functional/prefer-immutable-types': 'off'
+				'functional/prefer-immutable-types': 'off',
+				'functional/functional-parameters': 'off',
+				'functional/no-conditional-statements': 'off', // TODO - Can I precise what tenant and what is a conditional statement?
+				'functional/no-throw-statements': 'error',
 			}),
 
 			/* Tsdoc */
 			...(tsDocFlag && {
-				'tsDoc/syntax': 'warn'
+				'tsDoc/syntax': 'warn',
 			}),
 
 			/* Prettier rules */
 			...(prettierFlag && {
-				...prettier.rules
+				...prettier.rules,
 			}),
 
 			/* js rules */
 			...(jsFlag && {
 				...js.configs.all.rules,
 				// ...js.configs.recommended.rules,
+				'sort-imports': 'off', // Disabled due to a conflict with a rule from eslint-plugin-import
 				'array-callback-return': [
 					'error',
 					{
-						checkForEach: true
-					}
+						checkForEach: true,
+					},
 				],
 				'constructor-super': 'error',
 				'for-direction': 'error',
@@ -337,8 +379,8 @@ export default [
 					{
 						skipStrings: false,
 						skipTemplates: false,
-						skipJSXText: false
-					}
+						skipJSXText: false,
+					},
 				],
 				'no-loss-of-precision': 'error',
 				'no-misleading-character-class': 'error',
@@ -359,14 +401,14 @@ export default [
 				'no-unsafe-negation': [
 					'error',
 					{
-						enforceForOrderingRelations: true
-					}
+						enforceForOrderingRelations: true,
+					},
 				],
 				'no-unsafe-optional-chaining': [
 					'error',
 					{
-						disallowArithmeticOperators: true
-					}
+						disallowArithmeticOperators: true,
+					},
 				],
 				'no-unused-private-class-members': 'warn',
 				'no-unused-vars': [
@@ -374,8 +416,8 @@ export default [
 					{
 						varsIgnorePattern: '^_',
 						argsIgnorePattern: '^_',
-						reportUsedIgnorePattern: true
-					}
+						reportUsedIgnorePattern: true,
+					},
 				],
 				'no-use-before-define': [
 					'warn',
@@ -383,8 +425,8 @@ export default [
 						functions: false,
 						classes: false,
 						variables: true,
-						allowNamedExports: false
-					}
+						allowNamedExports: false,
+					},
 				],
 				'no-useless-backreference': 'error',
 				'use-isnan': 'error',
@@ -395,7 +437,7 @@ export default [
 				'default-param-last': 'error',
 				eqeqeq: 'error',
 				'func-names': ['warn', 'never'],
-				'func-style': ['warn', 'declaration'],
+				'func-style': ['warn', 'expression'],
 				'no-array-constructor': 'error',
 				'no-bitwise': 'error',
 				'no-case-declarations': 'error',
@@ -410,8 +452,8 @@ export default [
 				'no-extra-boolean-cast': [
 					'warn',
 					{
-						enforceForLogicalOperands: true
-					}
+						enforceForLogicalOperands: true,
+					},
 				],
 				'no-global-assign': 'error',
 				'no-implicit-coercion': 'error',
@@ -420,8 +462,8 @@ export default [
 				'no-invalid-this': [
 					'error',
 					{
-						capIsConstructor: false
-					}
+						capIsConstructor: false,
+					},
 				],
 				'no-labels': 'error',
 				'no-lone-blocks': 'error',
@@ -443,30 +485,30 @@ export default [
 				'no-sequences': [
 					'warn',
 					{
-						allowInParentheses: false
-					}
+						allowInParentheses: false,
+					},
 				],
 				'no-shadow': [
 					'error',
 					{
-						ignoreOnInitialization: true
-					}
+						ignoreOnInitialization: true,
+					},
 				],
 				'no-shadow-restricted-names': 'error',
 				'no-throw-literal': 'error',
 				'no-unused-expressions': [
 					'warn',
 					{
-						enforceForJSX: true
-					}
+						enforceForJSX: true,
+					},
 				],
 				'no-useless-call': 'error',
 				'no-useless-catch': 'warn',
 				'no-useless-computed-key': [
 					'warn',
 					{
-						enforceForClassMembers: true
-					}
+						enforceForClassMembers: true,
+					},
 				],
 				'no-useless-concat': 'error',
 				'no-useless-escape': 'warn',
@@ -486,7 +528,7 @@ export default [
 				'prefer-template': 'warn',
 				radix: 'error',
 				'require-await': 'error',
-				'require-yield': 'error'
+				'require-yield': 'error',
 			}),
 
 			/* Perfectionist rules */
@@ -494,7 +536,7 @@ export default [
 				...perfectionist.configs['recommended-natural'].rules,
 				'perfectionist/sort-objects': 'off',
 				'perfectionist/sort-classes': 'off',
-				'perfectionist/sort-object-types': 'off'
+				'perfectionist/sort-object-types': 'off',
 			}),
 
 			/* Unicorn rules */
@@ -502,7 +544,7 @@ export default [
 				...unicorn.configs.all.rules,
 				// ...unicorn.configs.recommended.rules,
 				'unicorn/better-regex': 'error',
-				'unicorn/prefer-query-selector': 'error'
+				'unicorn/prefer-query-selector': 'error',
 			}),
 
 			...(stylisticFlag && {
@@ -510,7 +552,7 @@ export default [
 				'@stylistic/array-bracket-newline': ['error', 'consistent'],
 				'@stylistic/array-bracket-spacing': [
 					'error',
-					'never'
+					'never',
 					// {
 					// 	arraysInArrays: true,
 					// 	objectsInArrays: false,
@@ -523,16 +565,16 @@ export default [
 					'error',
 					{
 						after: true,
-						before: false
-					}
+						before: false,
+					},
 				],
 				'@stylistic/indent': ['error', 'tab'],
 				'@stylistic/keyword-spacing': [
 					'error',
 					{
 						after: true,
-						before: true
-					}
+						before: true,
+					},
 				],
 				// @stylistic/linebreak-stylistic: ['error', 'unix' | 'windows' | 'off']
 				'@stylistic/multiline-comment-stylistic': 'off',
@@ -540,16 +582,16 @@ export default [
 					'error',
 					{
 						max: 1,
-						maxEOF: 1
-					}
+						maxEOF: 1,
+					},
 				],
 				'@stylistic/no-tabs': 'off',
 				'@stylistic/no-trailing-spaces': [
 					'error',
 					{
 						ignoreComments: true,
-						skipBlankLines: false
-					}
+						skipBlankLines: false,
+					},
 				],
 				'@stylistic/object-curly-spacing': ['error', 'always'],
 				'@stylistic/padded-blocks': ['error', 'never', { allowSingleLineBlocks: true }],
@@ -557,9 +599,9 @@ export default [
 				'@stylistic/quotes': [
 					'error',
 					'single',
-					{ allowTemplateLiterals: true, avoidEscape: true }
+					{ allowTemplateLiterals: true, avoidEscape: true },
 				],
-				'@stylistic/semi': ['error', 'always']
+				'@stylistic/semi': ['error', 'always'],
 			}),
 
 			// TypeScript-specific rules
@@ -633,23 +675,23 @@ export default [
 				'@typescript-eslint/related-getter-setter-pairs': 'off',
 				'@typescript-eslint/prefer-return-this-type': 'off',
 
-				/* Cofigurable */
-				'@typescript-eslint/explicit-module-boundary-types': 'error',
+				/* Configurable */
+				'@typescript-eslint/explicit-module-boundary-types': 'off',
 				'@typescript-eslint/consistent-generic-constructors': ['error', 'constructor'],
 				'@typescript-eslint/typedef': 'off', // To test
 				'@typescript-eslint/switch-exhaustiveness-check': 'error',
 				'@typescript-eslint/promise-function-async': ['error', { allowAny: false }],
 				'@typescript-eslint/prefer-string-starts-ends-with': [
 					'error',
-					{ allowSingleElementEquality: 'always' }
+					{ allowSingleElementEquality: 'always' },
 				],
 				'@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
 				'@typescript-eslint/consistent-type-assertions': [
 					'error',
 					{
 						assertionStyle: 'as',
-						objectLiteralTypeAssertions: 'allow-as-parameter'
-					}
+						objectLiteralTypeAssertions: 'allow-as-parameter',
+					},
 				],
 				'dot-notation': 'off',
 				'@typescript-eslint/dot-notation': ['error', { allowKeywords: true, allowPattern: '' }], // To test
@@ -658,15 +700,12 @@ export default [
 				'@typescript-eslint/array-type': ['error', { default: 'array-simple', readonly: 'array' }],
 				'@typescript-eslint/ban-ts-comment': [
 					'error',
-					{ 'ts-expect-error': 'allow-with-description' }
+					{ 'ts-expect-error': 'allow-with-description' },
 				],
 				'prefer-promise-reject-errors': 'off',
 				'@typescript-eslint/prefer-promise-reject-errors': 'error',
 				'no-throw-literal': 'off',
-				'@typescript-eslint/only-throw-error': [
-					'error',
-					{ allowThrowingAny: false, allowThrowingUnknown: true }
-				],
+				'@typescript-eslint/only-throw-error': 'off',
 				'@typescript-eslint/no-base-to-string': 'error',
 				'@typescript-eslint/no-explicit-any': ['error', { fixToUnknown: false }],
 				'no-unused-vars': 'off',
@@ -677,8 +716,8 @@ export default [
 						args: 'after-used',
 						caughtErrors: 'all',
 						ignoreRestSiblings: false,
-						reportUsedIgnorePattern: false
-					}
+						reportUsedIgnorePattern: false,
+					},
 				],
 				'@typescript-eslint/no-require-imports': ['error', { allowAsImport: false }],
 				'no-unused-expressions': 'off',
@@ -688,8 +727,8 @@ export default [
 						enforceForJSX: false,
 						allowShortCircuit: true,
 						allowTernary: true,
-						allowTaggedTemplates: true
-					}
+						allowTaggedTemplates: true,
+					},
 				],
 				'no-use-before-define': 'off',
 				'@typescript-eslint/no-use-before-define': 'error',
@@ -702,51 +741,63 @@ export default [
 				'no-empty-function': 'off',
 				'@typescript-eslint/no-empty-function': 'error',
 				'no-magic-numbers': 'off',
-				'@typescript-eslint/no-magic-numbers': 'error',
+				'@typescript-eslint/no-magic-numbers': [
+					'error',
+					{
+						ignoreEnums: true,
+						ignoreTypeIndexes: true,
+						ignoreArrayIndexes: true,
+					},
+				],
 				'@typescript-eslint/prefer-literal-enum-member': 'error',
 				'@typescript-eslint/prefer-nullish-coalescing': 'error',
 
-				'@typescript-eslint/prefer-readonly-parameter-types': 'error',
+				'@typescript-eslint/prefer-readonly-parameter-types': [
+					'error',
+					{
+						ignoreInferredTypes: true,
+					},
+				],
 				'@typescript-eslint/unbound-method': 'error',
 				'class-methods-use-this': 'off',
 				'@typescript-eslint/class-methods-use-this': 'error',
 				'@typescript-eslint/consistent-type-exports': [
 					'error',
-					{ fixMixedExportsWithInlineTypeSpecifier: true }
+					{ fixMixedExportsWithInlineTypeSpecifier: true },
 				],
 				'@typescript-eslint/consistent-type-imports': [
 					'error',
 					{
 						disallowTypeAnnotations: true,
 						fixStyle: 'inline-type-imports',
-						prefer: 'type-imports'
-					}
+						prefer: 'type-imports',
+					},
 				],
 				'@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
 				'@typescript-eslint/explicit-member-accessibility': [
 					'error',
-					{ accessibility: 'explicit' }
+					{ accessibility: 'explicit' },
 				],
 				'require-await': 'off',
 				'@typescript-eslint/require-await': 'error',
-				'@typescript-eslint/explicit-function-return-type': 'error',
+				'@typescript-eslint/explicit-function-return-type': 'off', // TODO
 				'@typescript-eslint/unified-signatures': [
 					'error',
-					{ ignoreDifferentlyNamedParameters: false }
+					{ ignoreDifferentlyNamedParameters: false },
 				],
 				'@typescript-eslint/triple-slash-reference': [
 					'error',
-					{ lib: 'never', path: 'never', types: 'never' }
+					{ lib: 'never', path: 'never', types: 'never' },
 				],
 				'@typescript-eslint/strict-boolean-expressions': [
 					'error',
 					{
 						allowNullableBoolean: false,
-						allowNullableObject: false
-					}
+						allowNullableObject: false,
+					},
 				],
 				'no-return-await': 'off',
-				'@typescript-eslint/return-await': ['error', 'always'],
+				'@typescript-eslint/return-await': ['error', 'in-try-catch'],
 				'@typescript-eslint/restrict-plus-operands': [
 					'error',
 					{
@@ -754,13 +805,13 @@ export default [
 						allowBoolean: false,
 						allowNullish: false,
 						allowNumberAndString: false,
-						allowRegExp: false
-					}
+						allowRegExp: false,
+					},
 				],
 				'max-params': 'off',
 				'@typescript-eslint/max-params': ['error', { max: 4 }],
 				'init-declarations': 'off',
-				'@typescript-eslint/init-declarations': ['error', 'never', { ignoreForLoopInit: true }],
+				'@typescript-eslint/init-declarations': 'off', // TODO
 
 				'@typescript-eslint/member-ordering': 'off',
 				'@typescript-eslint/naming-convention': 'off',
@@ -780,89 +831,151 @@ export default [
 				'@typescript-eslint/no-dupe-class-members': 'off',
 				/* TS done in theory - to check in practice */
 
+				'@typescript-eslint/no-extraneous-class': ['error', { allowStaticOnly: true }],
+
 				/* tailwind rules */
 				...(tailwindFlag && {
-					'tailwind/classnames-order': 'error'
+					'tailwind/classnames-order': 'error',
 				}),
 
 				/* pandacss rules */
 				...(pandacssFlag && {
-					'@pandacss/file-not-included': 'error'
-				})
-			})
-		}
+					'@pandacss/file-not-included': 'error',
+				}),
+				...(vitestFlag && {
+					...vitest.configs.recommended.rules,
+					'vitest/no-done-callback': 'off', //deprecated
+					'vitest/consistent-test-filename': ['error', { pattern: '.*\\.(spec|test)\\.[jt]s$' }],
+					'vitest/consistent-test-it': 'error',
+					'vitest/expect-expect': [
+						'error',
+						{
+							assertFunctionNames: [
+								'expect',
+								'request.*.expect',
+								'request.**.expect',
+								'request.*.expect*',
+								'get(*).expect',
+								'post(*).expect',
+								'put(*).expect',
+								'delete(*).expect',
+								'sendGetRequest(*).expect',
+								'sendGetRequest(*).*.expect',
+								'sendPostRequest(*).expect',
+								'sendPostRequest(*).*.expect',
+								'sendPutRequest(*).expect',
+								'sendPutRequest(*).*.expect',
+								'sendDeleteRequest(*).expect',
+								'sendDeleteRequest(*).*.expect',
+							],
+						},
+					],
+					'vitest/max-expects': ['error', { max: 5 }],
+					'vitest/max-nested-describe': ['error', { max: 3 }],
+					'vitest/no-alias-methods': 'error',
+					'vitest/no-commented-out-tests': 'error',
+					'vitest/no-conditional-expect': 'error',
+					'vitest/no-conditional-tests': 'error',
+					'vitest/no-disabled-tests': 'error',
+					'vitest/no-duplicate-hooks': 'error',
+					'vitest/no-focused-tests': [
+						'error',
+						{
+							fixable: false,
+						},
+					],
+					'vitest/no-hooks': 'error',
+					'vitest/no-identical-title': 'error',
+					'vitest/no-import-node-test': 'error',
+					'vitest/no-interpolation-in-snapshots': 'error',
+					'vitest/no-large-snapshots': ['error', { maxSize: 50 }],
+					'vitest/no-mocks-import': 'error',
+					'vitest/no-restricted-matchers': 'error',
+					'vitest/no-restricted-vi-methods': 'error',
+					'vitest/no-standalone-expect': 'error',
+					'vitest/no-test-prefixes': 'error',
+					'vitest/no-test-return-statement': 'error',
+					'vitest/prefer-called-with': 'error',
+					'vitest/prefer-comparison-matcher': 'error',
+					'vitest/prefer-each': 'error',
+					'vitest/prefer-equality-matcher': 'error',
+					'vitest/prefer-expect-assertions': 'error',
+					'vitest/prefer-expect-resolves': 'error',
+					'vitest/prefer-hooks-in-order': 'error',
+					'vitest/prefer-hooks-on-top': 'error',
+					'vitest/prefer-lowercase-title': ['error', { ignore: ['describe'] }],
+					'vitest/prefer-mock-promise-shorthand': 'error',
+					'vitest/prefer-snapshot-hint': 'error',
+					'vitest/prefer-spy-on': 'error',
+					'vitest/prefer-strict-equal': 'error',
+					'vitest/prefer-to-be': 'error',
+					'vitest/prefer-to-be-falsy': 'error',
+					'vitest/prefer-to-be-object': 'error',
+					'vitest/prefer-to-be-truthy': 'error',
+					'vitest/prefer-to-contain': 'error',
+					'vitest/prefer-to-have-length': 'error',
+					'vitest/prefer-todo': 'error',
+					'vitest/prefer-vi-mocked': 'error',
+					'vitest/require-hook': 'error',
+					'vitest/require-local-test-context-for-concurrent-snapshots': 'error',
+					'vitest/require-to-throw-message': 'error',
+					'vitest/require-top-level-describe': 'error',
+					'vitest/valid-describe-callback': 'error',
+					'vitest/valid-expect': ['error', { maxArgs: 1 }],
+					'vitest/valid-title': [
+						'error',
+						{
+							ignoreTypeOfDescribeName: true,
+						},
+					],
+					'vitest/valid-expect-in-promise': 'error',
+				}),
+			}),
+		},
 	},
 	{
 		name: 'tests',
+		ignores: [
+			'**/node_modules',
+			'**/dist',
+			'**/build',
+			'.stylelintrc.json',
+			'.svelte-kit/**',
+			'cspell',
+			'package-lock.json',
+			'package.json',
+			'tsconfig.json',
+		],
 		plugins: {
-			vitest: vitest
+			js: js,
+			'@typescript-eslint': ts,
+			vitest: vitest,
+			// Enter other plugins whose rules you want to match separately for the tests.
 		},
-		files: ['src/tests/**'],
+		files: ['tests/**'],
 		rules: {
-			...(vitestFlag && {
-				...vitest.configs.recommended.rules,
-				'dot-notation': 'off',
-				'vitest/no-done-callback': 'off', //deprecated
-				'vitest/consistent-test-filename': ['error', { pattern: '.*\\.(spec|test)\\.[jt]s$' }],
-				'vitest/consistent-test-it': 'error',
-				'vitest/expect-expect': ['error', { assertFunctionNames: ['expect'] }],
-				'vitest/max-expects': ['error', { max: 5 }],
-				'vitest/max-nested-describe': ['error', { max: 3 }],
-				'vitest/no-alias-methods': 'error',
-				'vitest/no-commented-out-tests': 'error',
-				'vitest/no-conditional-expect': 'error',
-				'vitest/no-conditional-tests': 'error',
-				'vitest/no-disabled-tests': 'error',
-				'vitest/no-duplicate-hooks': 'error',
-				'vitest/no-focused-tests': 'error',
-				'vitest/no-hooks': 'error',
-				'vitest/no-identical-title': 'error',
-				'vitest/no-import-node-test': 'error',
-				'vitest/no-interpolation-in-snapshots': 'error',
-				'vitest/no-large-snapshots': ['error', { maxSize: 50 }],
-				'vitest/no-mocks-import': 'error',
-				'vitest/no-restricted-matchers': 'error',
-				'vitest/no-restricted-vi-methods': 'error',
-				'vitest/no-standalone-expect': 'error',
-				'vitest/no-test-prefixes': 'error',
-				'vitest/no-test-return-statement': 'error',
-				'vitest/prefer-called-with': 'error',
-				'vitest/prefer-comparison-matcher': 'error',
-				'vitest/prefer-each': 'error',
-				'vitest/prefer-equality-matcher': 'error',
-				'vitest/prefer-expect-assertions': 'error',
-				'vitest/prefer-expect-resolves': 'error',
-				'vitest/prefer-hooks-in-order': 'error',
-				'vitest/prefer-hooks-on-top': 'error',
-				'vitest/prefer-lowercase-title': ['error', { ignore: ['describe'] }],
-				'vitest/prefer-mock-promise-shorthand': 'error',
-				'vitest/prefer-snapshot-hint': 'error',
-				'vitest/prefer-spy-on': 'error',
-				'vitest/prefer-strict-equal': 'error',
-				'vitest/prefer-to-be': 'error',
-				'vitest/prefer-to-be-falsy': 'error',
-				'vitest/prefer-to-be-object': 'error',
-				'vitest/prefer-to-be-truthy': 'error',
-				'vitest/prefer-to-contain': 'error',
-				'vitest/prefer-to-have-length': 'error',
-				'vitest/prefer-todo': 'error',
-				'vitest/prefer-vi-mocked': 'error',
-				'vitest/require-hook': 'error',
-				'vitest/require-local-test-context-for-concurrent-snapshots': 'error',
-				'vitest/require-to-throw-message': 'error',
-				'vitest/require-top-level-describe': 'error',
-				'vitest/valid-describe-callback': 'error',
-				'vitest/valid-expect': ['error', { maxArgs: 1 }],
-				'vitest/valid-title': 'error',
-				'vitest/valid-expect-in-promise': 'error'
-			})
-		}
+			...(vitestFlag &&
+				{
+					// Enter the rules you want to match separately for the tests.
+				}),
+		},
 	},
 	{
-		name: 'eslinting eslint',
+		name: 'Linting eslint',
+		ignores: [
+			'**/node_modules',
+			'**/dist',
+			'**/build',
+			'.stylelintrc.json',
+			'.svelte-kit/**',
+			'cspell',
+			'package-lock.json',
+			'package.json',
+			'tsconfig.json',
+		],
 		files: ['eslint.config.js'],
 		plugins: {
-			esEs
+			esEs,
 		},
 		rules: {
 			...(esEsFlag && {
@@ -896,24 +1009,48 @@ export default [
 				'esEs/no-only-tests': 'error',
 				'esEs/prefer-output-null': 'error',
 				'esEs/test-case-property-ordering': 'error',
-				'esEs/test-case-shorthand-strings': 'error'
-			})
-		}
+				'esEs/test-case-shorthand-strings': 'error',
+			}),
+		},
 	},
 	{
 		name: 'HTML',
 		files: ['**/*.html'],
-		ignores: ['.svelte-kit/**', '**/fixtures', 'node_modules', 'build'],
+		ignores: [
+			'**/node_modules',
+			'**/dist',
+			'**/build',
+			'.stylelintrc.json',
+			'.svelte-kit/**',
+			'cspell',
+			'package-lock.json',
+			'package.json',
+			'tsconfig.json',
+		],
 		languageOptions: {
-			parser: htmlParser
+			parser: htmlParser,
 		},
 		plugins: {
-			'@html-eslint': html
+			'@html-eslint': html,
 		},
 		rules: {
 			...(htmlFlag && {
-				...html.configs.recommended.rules
-			})
-		}
-	}
+				...html.configs.recommended.rules,
+			}),
+		},
+	},
+	{
+		name: 'JSON',
+		files: ['**/*.json'],
+		ignores: ["package-lock.json"],
+		language: "json/json",
+		plugins: {
+			json: json,
+		},
+		rules: {
+			...(jsonFlag && {
+				...json.configs.recommended.rules,
+			}),
+		},
+	},
 ];

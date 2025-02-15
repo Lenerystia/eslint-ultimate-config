@@ -5,7 +5,7 @@ One file, many plugins – just copy and paste.
 
 ### If you want install all at once
 ```
-npm install --save-dev @eslint/js typescript-eslint typescript svelte-eslint-parser eslint-plugin-svelte prettier-plugin-svelte @html-eslint/parser @html-eslint/eslint-plugin eslint-plugin-tailwindcss @pandacss/eslint-plugin eslint-plugin-drizzle @vitest/eslint-plugin eslint-plugin-perfectionist eslint-plugin-unicorn @stylistic/eslint-plugin eslint-plugin-functional eslint-config-prettier prettier-plugin-organize-imports eslint-plugin-security eslint-plugin-sonarjs eslint-plugin-tsdoc eslint-plugin-promise @cspell/eslint-plugin eslint-plugin-import eslint-plugin-import-alias eslint-plugin-eslint-plugin
+npm install --save-dev @eslint/js typescript-eslint typescript svelte-eslint-parser eslint-plugin-svelte prettier-plugin-svelte @html-eslint/parser @html-eslint/eslint-plugin eslint-plugin-tailwindcss @pandacss/eslint-plugin eslint-plugin-drizzle @vitest/eslint-plugin eslint-plugin-perfectionist eslint-plugin-unicorn @stylistic/eslint-plugin eslint-plugin-functional eslint-config-prettier prettier-plugin-organize-imports eslint-plugin-security eslint-plugin-sonarjs eslint-plugin-tsdoc eslint-plugin-promise @cspell/eslint-plugin eslint-plugin-import eslint-plugin-import-alias eslint-plugin-eslint-plugin @eslint/json
 ```
 
 ### [Eslint JS](https://eslint.org/)
@@ -30,6 +30,10 @@ npm install --save-dev svelte-eslint-parser eslint-plugin-svelte prettier-plugin
 ### [HTML](https://html-eslint.org/)
 ```
 npm install --save-dev @html-eslint/parser @html-eslint/eslint-plugin
+```
+### [JSON](https://eslint.org/blog/2024/10/eslint-json-markdown-support)
+```
+npm install --save-dev @eslint/json
 ```
 
 ### [Tailwind CSS](https://www.npmjs.com/package/eslint-plugin-tailwindcss)

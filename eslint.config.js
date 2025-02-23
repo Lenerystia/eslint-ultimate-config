@@ -194,7 +194,7 @@ export default [
 				'svelte/shorthand-directive': 'error',
 				'svelte/sort-attributes': 'error',
 				'svelte/spaced-html-comment': 'error',
-				'svelte/no-trailing-spaces': 'error',
+				'svelte/no-trailing-spaces': 'off', // Stylistic have same rule
 
 				// Best Practices
 				'svelte/no-useless-mustaches': 'error',
@@ -711,7 +711,7 @@ export default [
 				'@stylistic/function-call-argument-newline': ['error', 'consistent'],
 				'@stylistic/jsx-self-closing-comp': 'error',
 				'@stylistic/jsx-props-no-multi-spaces': 'error',
-				'@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 2 }],
+				'@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 3 }],
 				'@stylistic/object-property-newline': ['error', { allowAllPropertiesOnSameLine: false }],
 				'@stylistic/switch-colon-spacing': ['error', { after: true, before: false }],
 				'@stylistic/function-paren-newline': ['error', 'consistent'],

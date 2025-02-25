@@ -24,9 +24,12 @@ import tailwind from 'eslint-plugin-tailwindcss';
 import tsDoc from 'eslint-plugin-tsdoc';
 import unicorn from 'eslint-plugin-unicorn';
 import svelteParser from 'svelte-eslint-parser';
+import markdown from "@eslint/markdown";
 
 // IMPORTANT! If you want see what rules is in use, just run in terminal: npx @eslint/config-inspector
 // For most plugins you can check their docs via this tool
+
+// TODO TEMP - if you want, just change this rules
 
 // Toggles for enabling/disabling rule groups
 const aliasFlag = true; // Checked
@@ -39,6 +42,7 @@ const functionalFlag = false;
 const htmlFlag = true; // Checked
 const jsFlag = true; // Checked
 const jsonFlag = true; // Checked
+const markdownFlag = true; // Checked
 const nodeFlag = true; // Checked
 const pandacssFlag = false;
 const perfectionistFlag = true; // Checked
@@ -74,6 +78,7 @@ export default [
 			'src/routes/sandbox/**',
 			'src/routes/debug/**',
 			'tsconfig.json',
+			'docs/**',
 		],
 		languageOptions: {
 			parser: svelteParser,
@@ -269,9 +274,9 @@ export default [
 			/* sonarjs rules */
 			...(sonarjsFlag && {
 				...sonarjs.configs.recommended.rules,
-				'sonarjs/no-empty-test-file': 'error',
-				'sonarjs/todo-tag': 'error',
-				'sonarjs/no-commented-code': 'error',
+				'sonarjs/no-empty-test-file': 'off', // TODO TEMP
+				'sonarjs/todo-tag': 'off', // TODO TEMP
+				'sonarjs/no-commented-code': 'off', // TODO TEMP
 				'sonarjs/no-return-type-any': 'error',
 				'sonarjs/no-collapsible-if': 'error',
 				'sonarjs/prefer-immediate-return': 'error',
@@ -517,7 +522,7 @@ export default [
 				'prefer-spread': 'error',
 				'prefer-template': 'error',
 				'require-yield': 'error',
-				'no-console': 'error',
+				'no-console': 'off', // TODO TEMP
 				'func-name-matching': 'error',
 				'accessor-pairs': 'error',
 				'grouped-accessor-pairs': 'error',
@@ -652,7 +657,7 @@ export default [
 					'error',
 					{ allowList: { req: true, res: true, db: true, rel: true, char: true, env: true } },
 				],
-				'unicorn/no-empty-file': 'error',
+				'unicorn/no-empty-file': 'off', // TODO TEMP
 				'unicorn/error-message': 'error',
 				// Disabled: `null` is standard in databases, APIs, and explicit absence of value is clearer than `undefined`.
 				'unicorn/no-null': 'off',
@@ -711,7 +716,7 @@ export default [
 				'@stylistic/function-call-argument-newline': ['error', 'consistent'],
 				'@stylistic/jsx-self-closing-comp': 'error',
 				'@stylistic/jsx-props-no-multi-spaces': 'error',
-				'@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 3 }],
+				'@stylistic/newline-per-chained-call': ['error', { ignoreChainWithDepth: 3}],
 				'@stylistic/object-property-newline': ['error', { allowAllPropertiesOnSameLine: false }],
 				'@stylistic/switch-colon-spacing': ['error', { after: true, before: false }],
 				'@stylistic/function-paren-newline': ['error', 'consistent'],
@@ -721,9 +726,9 @@ export default [
 					{ blankLine: 'always', prev: '*', next: 'return' },
 				],
 				'@stylistic/semi-style': ['error', 'last'],
-				'@stylistic/linebreak-style': ['error', 'unix'], // Can be problematic
-				// '@stylistic/linebreak-style': 'off',
-				'@stylistic/max-len': ['error', { code: 120, ignoreUrls: true }],
+				// '@stylistic/linebreak-style': ['error', 'unix'], // Can be problematic
+				'@stylistic/linebreak-style': 'off',
+				'@stylistic/max-len': ['error', { code: 130, ignoreUrls: true }],
 				// '@stylistic/max-len': 'off',
 
 				// Disabled because Prettier/impractical
@@ -1185,7 +1190,7 @@ export default [
 	{
 		name: 'HTML',
 		files: ['**/*.html'],
-		ignores: ['.svelte-kit/**', '**/fixtures', 'node_modules', 'build'],
+		ignores: ['.svelte-kit/**', '**/fixtures', 'node_modules', 'build', 'docs/**',],
 		languageOptions: {
 			parser: htmlParser,
 		},
@@ -1218,7 +1223,7 @@ export default [
 	{
 		name: 'JSON',
 		files: ['**/*.json'],
-		ignores: ['package-lock.json'],
+		ignores: ['package-lock.json', 'docs/**',],
 		language: 'json/json',
 		plugins: {
 			json: json,
@@ -1229,4 +1234,23 @@ export default [
 			}),
 		},
 	},
+	{
+		name: 'Markdown',
+		files: ['**/*.md'],
+		language: "markdown/commonmark",
+		plugins: {
+			markdown
+		},
+		rules: {
+			...(markdownFlag && {
+				'markdown/fenced-code-language': 'error',
+				'markdown/heading-increment': 'error',
+				'markdown/no-duplicate-headings': 'error',
+				'markdown/no-empty-links': 'error',
+				'markdown/no-html': 'error',
+				'markdown/no-invalid-label-refs': 'error',
+				'markdown/no-missing-label-refs': 'error',
+			})
+		}
+	}
 ];

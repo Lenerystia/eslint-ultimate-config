@@ -5,7 +5,7 @@ One file, many plugins – just copy and paste.
 
 ### If you want install all at once
 ```
-npm install --save-dev @eslint/js typescript-eslint typescript svelte-eslint-parser eslint-plugin-svelte prettier-plugin-svelte @html-eslint/parser @html-eslint/eslint-plugin eslint-plugin-tailwindcss @pandacss/eslint-plugin eslint-plugin-drizzle @vitest/eslint-plugin eslint-plugin-perfectionist eslint-plugin-unicorn @stylistic/eslint-plugin eslint-plugin-functional eslint-config-prettier prettier-plugin-organize-imports eslint-plugin-security eslint-plugin-sonarjs eslint-plugin-tsdoc eslint-plugin-promise @cspell/eslint-plugin eslint-plugin-import eslint-plugin-import-alias eslint-plugin-eslint-plugin @eslint/json
+npm install --save-dev @eslint/js typescript-eslint typescript svelte-eslint-parser eslint-plugin-svelte prettier-plugin-svelte @html-eslint/parser @html-eslint/eslint-plugin eslint-plugin-tailwindcss @pandacss/eslint-plugin eslint-plugin-drizzle @vitest/eslint-plugin eslint-plugin-perfectionist eslint-plugin-unicorn @stylistic/eslint-plugin eslint-plugin-functional eslint-config-prettier prettier-plugin-organize-imports eslint-plugin-security eslint-plugin-sonarjs eslint-plugin-tsdoc eslint-plugin-promise @cspell/eslint-plugin eslint-plugin-import eslint-plugin-import-alias eslint-plugin-eslint-plugin @eslint/json eslint-plugin-regexp @eslint/markdown yaml-eslint-parser eslint-plugin-yml
 ```
 
 ### [Eslint JS](https://eslint.org/)
@@ -93,4 +93,25 @@ npm install --save-dev eslint-plugin-import eslint-plugin-import-alias
 ```
 npm install --save-dev eslint-plugin-eslint-plugin
 ```
+
+### [Markdown](https://eslint.org/blog/2024/10/eslint-json-markdown-support/)
+```
+npm install --save-dev @eslint/markdown
+```
+
+### [JSON](https://eslint.org/blog/2024/10/eslint-json-markdown-support/)
+```
+npm install --save-dev @eslint/json
+```
+
+### [YAML](https://github.com/ota-meshi/eslint-plugin-yml)
+```
+npm install --save-dev yaml-eslint-parser eslint-plugin-yml
+```
+
+### [RegExp](https://ota-meshi.github.io/eslint-plugin-regexp/user-guide/)
+```
+npm install --save-dev eslint-plugin-regexp
+```
+
 ## If you want more tools, go there -> [More tools](https://github.com/Lenerystia/JS-TS-ultimate-config-selected-tool)

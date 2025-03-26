@@ -199,7 +199,7 @@ export default [
 				'svelte/shorthand-directive': 'error',
 				'svelte/sort-attributes': 'error',
 				'svelte/spaced-html-comment': 'error',
-				'svelte/no-trailing-spaces': 'off', // Stylistic have same rule
+				'svelte/no-trailing-spaces': 'off', // Stylistic has same rule
 
 				// Best Practices
 				'svelte/no-useless-mustaches': 'error',
@@ -1016,14 +1016,17 @@ export default [
 				'@typescript-eslint/no-restricted-imports': 'off',
 				// "The code problem checked by this ESLint rule is automatically checked by the TypeScript compiler.
 				// Thus, it is not recommended to turn on this rule in new TypeScript projects."
+				// https://typescript-eslint.io/rules/no-redeclare/
 				'@typescript-eslint/no-redeclare': 'off',
 				'@typescript-eslint/require-array-sort-compare': 'off',
 				// "If possible, it is recommended to use tsconfig's noImplicitReturns option rather than this rule."
+				// https://typescript-eslint.io/rules/consistent-return/
 				'consistent-return': 'off',
 				'@typescript-eslint/consistent-return': 'off',
 				// "The code problem checked by this ESLint rule is automatically checked by the TypeScript compiler.
 				// Thus, it is not recommended to turn on this rule in new TypeScript projects.
 				// You only need to enable this rule if you prefer the ESLint error messages over the TypeScript compiler error messages."
+				// https://typescript-eslint.io/rules/no-dupe-class-members/
 				'no-dupe-class-members': 'off',
 				'@typescript-eslint/no-dupe-class-members': 'off',
 

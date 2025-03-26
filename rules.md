@@ -1,6 +1,6 @@
-## eslint-plugin-regexp
+## [eslint-plugin-regexp](https://ota-meshi.github.io/eslint-plugin-regexp/user-guide/)
 ```JavaScript
-    'regex/optimal-quantifier-concatenation': 'error',
+        'regex/optimal-quantifier-concatenation': 'error',
 	'regex/prefer-range': 'error',
 	'regex/prefer-result-array-groups': 'error',
 	'regex/prefer-set-operation': 'error',
@@ -84,7 +84,7 @@
 	'regex/unicode-property': 'error',
 	'regex/use-ignore-case': 'error',
 ```
-## eslint-plugin-node - [Link]
+## [eslint-plugin-node](https://www.npmjs.com/package/eslint-plugin-node)
 ```JavaScript
 	'node/callback-return': 'error',
 	'node/exports-style': ['error', 'exports'],
@@ -128,12 +128,12 @@
 	'node/no-process-exit': 'off',
 	'node/file-extension-in-import': 'off',
 ```
-## eslint-plugin-drizzle
+## [eslint-plugin-drizzle](https://orm.drizzle.team/docs/eslint-plugin)
 ```JavaScript
 	'drizzle/enforce-delete-with-where': 'error',
 	'drizzle/enforce-update-with-where': 'error',
 ```
-## eslint-plugin-perfectionist
+## [eslint-plugin-perfectionist](https://perfectionist.dev/)
 ```JavaScript
 	// Recommended-natural
 	'perfectionist/sort-variable-declarations': [
@@ -253,9 +253,9 @@
 	'perfectionist/sort-objects': 'off',
 	'perfectionist/sort-classes': 'off',
 ```
-## unicorn
+## [eslint-plugin-unicorn](https://github.com/sindresorhus/eslint-plugin-unicorn)
 ```JavaScript
-'unicorn/filename-case': [
+        'unicorn/filename-case': [
 		'error',
 		{
 			cases: {
@@ -394,9 +394,9 @@
 	'unicorn/text-encoding-identifier-case': 'error',
 	'unicorn/throw-new-error': 'error',
 ```
-## @stylistic/eslint-plugin
+## [@stylistic/eslint-plugin](https://eslint.style/packages/default)
 ```JavaScript
-'@stylistic/lines-between-class-members': 'error',
+        '@stylistic/lines-between-class-members': 'error',
 	'@stylistic/spaced-comment': 'error',
 	'@stylistic/jsx-function-call-newline': 'error',
 	'@stylistic/jsx-curly-brace-presence': 'error',
@@ -481,7 +481,7 @@
 	'@stylistic/wrap-regex': 'off',
 	'@stylistic/nonblock-statement-body-position': 'off',
 ```
-## eslint-plugin-functional
+## [eslint-plugin-functional](https://github.com/eslint-functional/eslint-plugin-functional)
 ```JavaScript
 	// Recommended
 	'functional/functional-parameters': 'error',
@@ -505,9 +505,9 @@
 	'functional/prefer-tacit': 'error',
 	'functional/readonly-type': 'error',
 ```
-## prettier-plugin-import
+## [eslint-plugin-import](https://github.com/import-js/eslint-plugin-import)
 ```JavaScript
-'import/no-relative-packages': 'error',
+        'import/no-relative-packages': 'error',
 	'import/consistent-type-specifier-style': 'error',
 	'import/no-self-import': 'error',
 	'import/no-cycle': 'error',
@@ -558,7 +558,7 @@
 	'import/no-mutable-exports': 'off',
 	'import/no-extraneous-dependencies': 'off',
 ```
-## eslint-plugin-security
+## [eslint-plugin-security](https://github.com/nodesecurity/eslint-plugin-security)
 ```JavaScript
 	'security/detect-unsafe-regex': 'error',
 	'security/detect-non-literal-regexp': 'error',
@@ -575,9 +575,9 @@
 	'security/detect-new-buffer': 'error',
 	'security/detect-bidi-characters': 'error',
 ```
-## eslint-plugin-sonarjs
+## [eslint-plugin-sonarjs](https://www.npmjs.com/package/eslint-plugin-sonarjs)
 ```JavaScript
-'sonarjs/class-name': 'error',
+        'sonarjs/class-name': 'error',
 	'sonarjs/no-fallthrough': 'error',
 	'sonarjs/no-equals-in-for-termination': 'error',
 	'sonarjs/no-extra-arguments': 'error',
@@ -836,13 +836,13 @@
 	'sonarjs/no-reference-error': 'off', // Possible problem when use 'console' od 'process'
 	'sonarjs/shorthand-property-grouping': 'error',
 ```
-## eslint-plugin-tsdoc
+## [eslint-plugin-tsdoc](https://tsdoc.org/pages/packages/eslint-plugin-tsdoc/)
 ```JavaScript
-    'tsDoc/syntax': 'warn' 
+        'tsDoc/syntax': 'warn' 
 ```
-## eslint-plugin-promise
+## [eslint-plugin-promise](https://github.com/xjamundx/eslint-plugin-promise)
 ```JavaScript
-    'promise/always-return': 'error',
+        'promise/always-return': 'error',
 	'promise/no-return-wrap': 'error',
 	'promise/param-names': 'error',
 	'promise/catch-or-return': 'error',
@@ -860,64 +860,11 @@
 	'promise/prefer-catch': 'error',
 	'promise/spec-only': 'error',
 ```
-## @cspell/eslint-plugin
+## [@cspell/eslint-plugin](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-eslint-plugin)
 ```JavaScript
-    'cspell/spellchecker': 'warn',
+        'cspell/spellchecker': 'warn',
 ```
-## eslint-plugin-import
-```JavaScript
-	'import/no-relative-packages': 'error',
-	'import/consistent-type-specifier-style': 'error',
-	'import/no-self-import': 'error',
-	'import/no-cycle': 'error',
-	'import/no-named-default': 'error',
-	'import/no-unused-modules': 'error',
-	'import/no-commonjs': 'error',
-	'import/no-amd': 'error',
-	'import/first': 'error',
-	'import/max-dependencies': 'error',
-	'import/no-nodejs-modules': 'error',
-	'import/newline-after-import': 'error',
-	'import/no-dynamic-require': 'error',
-	'import/dynamic-import-chunkname': 'error',
-	'import/no-import-module-exports': 'error',
-	'import/no-empty-named-blocks': 'error',
-	'import/exports-last': 'error',
-	'import/no-deprecated': 'error',
-
-	// Recommended
-	'import/named': 'error',
-	'import/default': 'error',
-	'import/namespace': 'error',
-	'import/export': 'error',
-	'import/no-named-as-default': 'error',
-	'import/no-named-as-default-member': 'error',
-	'import/no-duplicates': 'error',
-	//"If you're using a module bundler other than Node or Webpack, you may end up with a lot of false positive reports of missing dependencies."
-	//https://github.com/import-js/eslint-plugin-import/blob/v2.31.0/docs/rules/no-unresolved.md
-	'import/no-unresolved': 'off',
-	'import/no-anonymous-default-export': 'error',
-	'import/no-absolute-path': 'error',
-	'import/no-useless-path-segments': ['error', { noUselessIndex: true }],
-
-	// Useless
-	'import/no-namespace': 'off',
-	'import/group-exports': 'off',
-	'import/no-relative-parent-imports': 'off',
-	'import/no-webpack-loader-syntax': 'off',
-	'import/prefer-default-export': 'off',
-	'import/no-default-export': 'off',
-	'import/unambiguous': 'off',
-	'import/no-unassigned-import': 'off',
-	'import/no-named-export': 'off',
-	'import/no-internal-modules': 'off',
-	'import/extensions': 'off',
-	'import/no-restricted-paths': 'off',
-	'import/order': 'off',
-	'import/no-mutable-exports': 'off',
-	'import/no-extraneous-dependencies': 'off',
-```
-## eslint-plugin-import-alias
+## [eslint-plugin-import-alias](https://www.npmjs.com/package/eslint-plugin-import-alias)
 ```JavaScript
 	'alias/import-alias': [
 		'error',
@@ -933,9 +880,9 @@
 		},
 	],
 ```
-## eslint-plugin-eslint-plugin
+## [eslint-plugin-eslint-plugin](https://www.npmjs.com/package/eslint-plugin-eslint-plugin)
 ```JavaScript
-    'esEs/consistent-output': 'error',
+        'esEs/consistent-output': 'error',
 	'esEs/fixer-return': 'error',
 	'esEs/meta-property-ordering': 'error',
 	'esEs/no-deprecated-context-methods': 'error',
@@ -967,7 +914,7 @@
 	'esEs/test-case-property-ordering': 'error',
 	'esEs/test-case-shorthand-strings': 'error',
 ```
-## @eslint/json
+## [@eslint/json](https://eslint.org/blog/2024/10/eslint-json-markdown-support/)
 ```JavaScript
 	// Recommended
 	'json/no-duplicate-keys': 'error',
@@ -978,9 +925,9 @@
 	'json/sort-keys': 'off',
 	'json/top-level-interop': 'error',
 ```
-## @eslint/js
+## [@eslint/js](https://eslint.org/)
 ```JavaScript
-'constructor-super': 'error',
+        'constructor-super': 'error',
 	'for-direction': 'error',
 	'getter-return': 'error',
 	'no-async-promise-executor': 'error',
@@ -1219,7 +1166,7 @@
 	'prefer-promise-reject-errors': 'off',
 	'require-await': 'off',
 ```
-## @eslint/markdown
+## [@eslint/markdown](https://eslint.org/blog/2024/10/eslint-json-markdown-support/)
 ```JavaScript
 	'markdown/fenced-code-language': 'error',
 	'markdown/heading-increment': 'error',
@@ -1229,7 +1176,7 @@
 	'markdown/no-invalid-label-refs': 'error',
 	'markdown/no-missing-label-refs': 'error',
 ```
-## @html-eslint/eslint-plugin
+## [@html-eslint/eslint-plugin](https://html-eslint.org/)
 ```JavaScript
     // Recommended
 	'@html-eslint/require-lang': 'error',
@@ -1283,7 +1230,7 @@
 	'@html-eslint/require-open-graph-protocol': 'off',
 	'@html-eslint/no-inline-styles': 'off',
 ```
-## @typescript-eslint/eslint-plugin
+## [@typescript-eslint/eslint-plugin](https://typescript-eslint.io/)
 ```JavaScript
 /* Non configurable */
 	'@typescript-eslint/no-dynamic-delete': 'error',
@@ -1558,7 +1505,7 @@
 	'no-dupe-class-members': 'off',
 	'@typescript-eslint/no-dupe-class-members': 'off',
 ```
-## @pandacss/eslint-plugin
+## [@pandacss/eslint-plugin](https://github.com/chakra-ui/eslint-plugin-panda)
 ```JavaScript
 	'@pandacss/file-not-included': 'error',
 	'@pandacss/no-config-function-in-source': 'error',
@@ -1579,7 +1526,7 @@
 	'@pandacss/prefer-composite-properties': 'error',
 	'@pandacss/prefer-unified-property-style': 'error',
 ```
-## @vitest/eslint-plugin
+## [@vitest/eslint-plugin](https://github.com/vitest-dev/eslint-plugin-vitest)
 ```JavaScript
 	// Recommended
 	'vitest/no-identical-title': 'error',
@@ -1684,7 +1631,7 @@
 	'vitest/padding-around-test-blocks': 'error',
 	'vitest/require-mock-type-parameters': 'error',
 ```
-## eslint-plugin-svelte
+## [eslint-plugin-svelte](https://github.com/sveltejs/eslint-plugin-svelte)
 ```JavaScript
         'svelte/comment-directive': 'error',
 	'svelte/consistent-selector-style': 'error',
@@ -1764,9 +1711,9 @@
 	// 'svelte/experimental-require-slot-types': 'error',
 	// 'svelte/experimental-require-strict-events': 'off',
 ```
-## eslint-plugin-tailwindcss
+## [eslint-plugin-tailwindcss](https://www.npmjs.com/package/eslint-plugin-tailwindcss)
 ```JavaScript
-'tailwind/classnames-order': 'error',
+        'tailwind/classnames-order': 'error',
 	'tailwind/enforces-negative-arbitrary-values': 'error',
 	'tailwind/enforces-shorthand': 'error',
 	'tailwind/migration-from-tailwind-2': 'error',
@@ -1775,9 +1722,9 @@
 	'tailwind/no-custom-classname': 'error',
 	'tailwind/no-unnecessary-arbitrary-value': 'error',
 ```
-## eslint-plugin-yml
+## [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)
 ```JavaScript
-'yml/block-mapping-colon-indicator-newline': 'error',
+        'yml/block-mapping-colon-indicator-newline': 'error',
 	'yml/block-mapping-question-indicator-newline': 'error',
 	'yml/block-mapping': 'error',
 	'yml/block-sequence-hyphen-indicator-newline': 'error',
